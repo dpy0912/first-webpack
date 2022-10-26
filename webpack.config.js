@@ -5,7 +5,7 @@ const WebpackBar = require('webpackbar');
 
 // 打包的进度条
 const progressPlugin = new WebpackBar({
-	color: '#85d', // 默认green，进度条颜色支持HEX
+	color: '#e59e1c', // 默认green，进度条颜色支持HEX
 	basic: false, // 默认true，启用一个简单的日志报告器
 	profile: false, // 默认false，启用探查器。
 });
@@ -18,9 +18,6 @@ module.exports = function (env, argv) {
 		// 入口文件
 		entry: {
 			main: './src/index.js',
-			page1: './src/views/index.js',
-			css: './src/index.css',
-			ts: './src/views/index.ts',
 		},
 		// 出口文件
 		output: {
@@ -38,16 +35,16 @@ module.exports = function (env, argv) {
 					test: /\.ts$/,
 					use: 'ts-loader',
 				},
-				{
-					test: /\.(js|jsx)$/,
-					use: 'babel-loader',
-				},
+				// {
+				// 	test: /\.(js|jsx)$/,
+				// 	use: 'babel-loader',
+				// },
 			],
 		},
 		// ProgressPlugin进度插件，自定义进度条
 		plugins: [
 			progressPlugin,
-			new HtmlWebpackPlugin({ template: './src/index.html' }),
+			new HtmlWebpackPlugin({ template: './public/index.html' }),
 		],
 	};
 };
