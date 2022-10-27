@@ -10,6 +10,8 @@ const progressPlugin = new WebpackBar({
 	profile: false, // 默认false，启用探查器。
 });
 
+// 明天继续学习webpack的代码
+
 module.exports = function (env, argv) {
 	return {
 		// 开发中模式
@@ -29,7 +31,7 @@ module.exports = function (env, argv) {
 			rules: [
 				{
 					test: /\.css$/,
-					use: 'css-loader',
+					use: ['style-loader', 'css-loader'],
 				},
 				{
 					test: /\.ts$/,
