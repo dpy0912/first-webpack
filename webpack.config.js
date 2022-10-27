@@ -27,6 +27,7 @@ module.exports = function (env, argv) {
 		output: {
 			path: path.resolve(__dirname, 'dist'),
 			filename: '[name].bundle.js', // name占位符来确保名字是唯一的
+			clean: true, // 每次build之前都出执行清除输出文件的操作
 		},
 		// 使用loader进行类型的转换（test是需要编译的文件类型，use是表示需要使用某种loader进行转换）
 		module: {
