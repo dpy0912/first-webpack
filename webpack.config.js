@@ -10,8 +10,6 @@ const progressPlugin = new WebpackBar({
 	profile: false, // 默认false，启用探查器。
 });
 
-// 明天继续学习webpack的代码
-
 module.exports = function (env, argv) {
 	return {
 		// 开发中模式
@@ -41,10 +39,15 @@ module.exports = function (env, argv) {
 				// 	test: /\.(js|jsx)$/,
 				// 	use: 'babel-loader',
 				// },
+				// 加载图片
 				{
 					test: /\.(png|svg|jpg|jpeg|gif)$/i,
 					type: 'asset/resource',
 				},
+				{
+					test: /\.(woff|woff2|eot|ttf|otf)$/i,
+					type: 'asset/resource'
+				}
 			],
 		},
 		// ProgressPlugin进度插件，自定义进度条
