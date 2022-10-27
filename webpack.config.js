@@ -2,6 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const toml = require('toml');
+const yaml = require('yamljs');
+const json5 = require('json5');
 
 // 打包的进度条
 const progressPlugin = new WebpackBar({
@@ -17,12 +20,13 @@ module.exports = function (env, argv) {
 		target: 'web', // 打包之后的运行， node和web
 		// 入口文件
 		entry: {
-			main: './src/index.js',
+			index: './src/index.js',
+			print: './src/print.js'
 		},
 		// 出口文件
 		output: {
 			path: path.resolve(__dirname, 'dist'),
-			filename: '[name].js', // name占位符来确保名字是唯一的
+			filename: '[name].bundle.js', // name占位符来确保名字是唯一的
 		},
 		// 使用loader进行类型的转换（test是需要编译的文件类型，use是表示需要使用某种loader进行转换）
 		module: {
@@ -57,6 +61,27 @@ module.exports = function (env, argv) {
 				{
 					test: /\.xml$/i,
 					use: ['xml-loader'],
+				},
+				{
+					test: /\.toml$/i,
+					type: "json",
+					parser: {
+						parse: toml.parse,
+					}
+				},
+				{
+					test: /\.yaml$/i,
+					type: "json",
+					parser: {
+						parse: yaml.parse,
+					}
+				},
+				{
+					test: /\.json5$/i,
+					type: "json",
+					parser: {
+						parse: json5.parse,
+					}
 				}
 			],
 		},
