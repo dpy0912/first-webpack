@@ -88,7 +88,7 @@ module.exports = function (env, argv) {
 		// ProgressPlugin进度插件，自定义进度条
 		plugins: [
 			progressPlugin,
-			new HtmlWebpackPlugin({ template: './public/index.html' }),
+			new HtmlWebpackPlugin({ template: './public/index.html', title: "first webpack"}),
 		],
 	};
 };
