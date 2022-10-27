@@ -16,7 +16,7 @@ module.exports = function (env, argv) {
 	return {
 		// 开发中模式
 		mode: env.production ? 'production' : 'development',
-		target: 'node',
+		target: 'web', // 打包之后的运行， node和web
 		// 入口文件
 		entry: {
 			main: './src/index.js',
@@ -41,6 +41,10 @@ module.exports = function (env, argv) {
 				// 	test: /\.(js|jsx)$/,
 				// 	use: 'babel-loader',
 				// },
+				{
+					test: /\.(png|svg|jpg|jpeg|gif)$/i,
+					type: 'asset/resource',
+				},
 			],
 		},
 		// ProgressPlugin进度插件，自定义进度条

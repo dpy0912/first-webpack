@@ -6,4 +6,5 @@ body {
 
 .hello {
     color: red;
+    background: url("../assets/images/icon.jpg");
 }
