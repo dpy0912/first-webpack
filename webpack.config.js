@@ -53,6 +53,8 @@ module.exports = {
     // 优化
     optimization: {
         runtimeChunk: 'single',
+        // 模块的id（缓存作用）
+        moduleIds: 'deterministic',
         // 切割块
         splitChunks: {
             cacheGroups: {
