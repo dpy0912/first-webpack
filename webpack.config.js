@@ -30,6 +30,19 @@ module.exports = function (env, argv) {
 			clean: true, // 每次build之前都出执行清除输出文件的操作
 		},
 		// 使用loader进行类型的转换（test是需要编译的文件类型，use是表示需要使用某种loader进行转换）
+		// 工具库
+		devtool: env.production ? null : 'inline-source-map',
+		// 服务启动（启动一个静态的本地服务）
+		devServer: {
+			// 静态目录
+			static: './dist',
+			// 模块热更新
+			hot: true,
+		},
+		// 优化
+		optimization: {
+			runtimeChunk: 'single'
+		},
 		module: {
 			rules: [
 				{
