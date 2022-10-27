@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import './styles/index.css'
 import Icon from './assets/images/icon.jpg'
+import DataXml from './assets/data.xml'
+import Notes from './assets/cvs/data.csv'
 
 function component() {
     const element = document.createElement('div');
@@ -13,6 +15,9 @@ function component() {
     myImage.src = Icon;
 
     element.appendChild(myImage)
+
+    console.log('DataXml ==>', DataXml)
+    console.log('Notes ==>', Notes)
 
     return element;
 }

@@ -47,6 +47,16 @@ module.exports = function (env, argv) {
 				{
 					test: /\.(woff|woff2|eot|ttf|otf)$/i,
 					type: 'asset/resource'
+				},
+				// cvs格式
+				{
+					test: /\.(csv|tsv)$/i,
+					use: ['csv-loader'],
+				},
+				// xml格式
+				{
+					test: /\.xml$/i,
+					use: ['xml-loader'],
 				}
 			],
 		},
