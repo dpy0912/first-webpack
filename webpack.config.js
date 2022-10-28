@@ -5,6 +5,8 @@ const WebpackBar = require('webpackbar');
 const toml = require('toml');
 const yaml = require('yamljs');
 const json5 = require('json5');
+// 引入workbox
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 // 打包的进度条
 const progressPlugin = new WebpackBar({
@@ -12,6 +14,12 @@ const progressPlugin = new WebpackBar({
     basic: false, // 默认true，启用一个简单的日志报告器
     profile: false, // 默认false，启用探查器。
 });
+
+// 引入workbox
+const workboxPlugin = new WorkboxPlugin.GenerateSW({
+    clientsClaim: true,
+    skipWaiting: true
+})
 
 module.exports = {
     // 开发中模式
@@ -88,6 +96,7 @@ module.exports = {
                         }
                     }
                 ],
+                exclude: /node_modules/,
             },
             // {
             // 	test: /\.(js|jsx)$/,
@@ -138,6 +147,10 @@ module.exports = {
     // ProgressPlugin进度插件，自定义进度条
     plugins: [
         progressPlugin,
+        workboxPlugin,
         new HtmlWebpackPlugin({template: './public/index.html', title: "Caching"}),
     ],
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js','.jsx']
+    }
 };
