@@ -24,11 +24,11 @@ module.exports = {
             // 防止重复，共享
             // dependOn: 'shared'
         },
-        print: {
-            import: './src/print.js',
-            // 防止重复，共享
-            // dependOn: 'shared'
-        },
+        // print: {
+        //     import: './src/print.js',
+        //     // 防止重复，共享
+        //     // dependOn: 'shared'
+        // },
         // 共享的工具库
         // shared: 'lodash',
     },

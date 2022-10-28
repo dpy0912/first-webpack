@@ -1,6 +1,7 @@
-import _ from 'loadsh'
+console.log(
+    'The print.js module has loaded! See the network tab in dev tools...'
+);
 
-export default function printMe(text) {
-    console.log('I get called from print.js!', text);
-    console.log(_.join(['Another', 'module', 'loaded!'], ' '));
-}
+export default () => {
+    console.log('Button Clicked: Here\'s "some text"!');
+};

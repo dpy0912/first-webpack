@@ -1,19 +1,25 @@
 import _ from 'lodash';
-import printMe from './print'
 
 function component() {
     const element = document.createElement('div');
-    const btn = document.createElement('button');
 
-    // lodash（目前通过一个 script 引入）对于执行这一行是必需的
+    const button = document.createElement('button');
+    const br = document.createElement('br');
+
+    button.innerHTML = 'Click me and look at the console!';
     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    element.appendChild(br);
+    element.appendChild(button);
 
-    btn.innerHTML = 'Click me and check!';
-    btn.onclick = printMe.bind(null, '点击我哦！');
-
-    element.appendChild(btn)
+    // 懒加载
+    button.onclick = e => import(/* webpackChunkName: "print" */ './print').then(module => {
+        // 使用es6语法import的时候，必须指向模块的default，这样才能被认为是处理promise
+        const print = module.default;
+        print();
+    });
 
     return element;
 }
+
 
 document.body.appendChild(component());
