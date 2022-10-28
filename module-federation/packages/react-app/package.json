@@ -1,7 +1,7 @@
 {
-  "name": "react",
+  "name": "react-app",
   "version": "1.0.0",
-  "description": "react",
+  "description": "react app",
   "main": "index.js",
   "scripts": {
     "start": "webpack server",

@@ -14,14 +14,15 @@ const progressPlugin = new WebpackBar({
 // 编译html模板
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: './public/index.html',
-    title: 'React'
+    title: 'reactApp'
 })
 
 // 联邦模式
 const moduleFederationPlugin = new ModuleFederationPlugin({
-    name: 'react',
-    remotes: {
-        "reactApp": 'reactApp@http://localhost:3002/remoteEntry.js'
+    name: 'reactApp',
+    filename: 'remoteEntry.js',
+    exposes: {
+        './App': './src/App'
     },
     // shared: {react: {singleton: true, eager: true}, "react-dom": {singleton: true}},
 })
@@ -39,7 +40,7 @@ module.exports = {
     target: "web",
     devServer: {
         static: pathResolve('dist'),
-        port: 3000,
+        port: 3002,
         open: true,
         hot: true,
     },

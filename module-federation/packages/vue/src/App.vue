@@ -1,5 +1,6 @@
 <template>
-  <div>Vue模块
+  <div>
+    <div>Vue模块</div>
     <router-view></router-view>
   </div>
 </template>
