@@ -39,6 +39,11 @@ module.exports = {
         clean: true, // 每次build之前都出执行清除输出文件的操作
         // 公共的服务目录
         publicPath: "/",
+        // 文件库
+        library: {
+            name: 'webpackNumbers',
+            type: 'umd'
+        },
     },
     // 使用loader进行类型的转换（test是需要编译的文件类型，use是表示需要使用某种loader进行转换）
     // 工具库
@@ -73,8 +78,16 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.ts$/,
-                use: 'ts-loader',
+                test: /\.(ts|tsx)$/,
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        // 仅转义
+                        options: {
+                            transpileOnly: true,
+                        }
+                    }
+                ],
             },
             // {
             // 	test: /\.(js|jsx)$/,
