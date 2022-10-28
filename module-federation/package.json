@@ -1,6 +1,13 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "dev:start": "pnpm -r --parallel --filter=./packages/* run start",
+    "dev:react": "pnpm --filter=./packages/react run start",
+    "dev:vue": "pnpm --filter=./packages/vue run start",
+    "learn:start": "lerna run --parallel start",
+    "learn:build": "lerna run build"
+  },
   "devDependencies": {
     "lerna": "^5.5.2"
   }

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+
+# 配置文件的日志和锁版本的包
+/npm-debug.log
+/yarn-error.log
+/yarn-lock.json
+/package-lock.json

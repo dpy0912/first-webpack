@@ -2,7 +2,7 @@ const path = require("path");
 const WebpackBar = require("webpackbar");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const {ModuleFederationPlugin} = require('webpack').container;
-const ExternalRemotesPlugin = require("external-remotes-plugin");
+const {VueLoaderPlugin} = require('vue-loader')
 
 // 打包的进度条
 const progressPlugin = new WebpackBar({
@@ -14,24 +14,20 @@ const progressPlugin = new WebpackBar({
 // 编译html模板
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
     template: './public/index.html',
-    title: 'React'
+    title: 'Vue'
 })
 
 // 联邦模式
 const moduleFederationPlugin = new ModuleFederationPlugin({
-    name: 'react',
-    remotes: {
-        vue: 'vue@http://localhost:3001/remoteEntry.js'
-    },
-    shared: {
-        react: {
-            eager: true
-        }
+    name: 'vue',
+    filename: 'remoteEntry.js',
+    exposes: {
+        './App': './src/App'
     }
 })
 
-// 远程仓库加载技术
-const externalRemotesPlugin = new ExternalRemotesPlugin()
+// vue的loader加载器
+const vueLoaderPlugin = new VueLoaderPlugin()
 
 const pathResolve = (filePath) => {
     return path.resolve(__dirname, filePath)
@@ -43,7 +39,7 @@ module.exports = {
     target: "web",
     devServer: {
         static: pathResolve('dist'),
-        port: 3000,
+        port: 3001,
         open: true,
         hot: true,
     },
@@ -61,26 +57,30 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(ts|tsx)?$/,
+                test: /\.vue$/,
+                use: ['vue-loader'],
+            },
+            {
+                test: /\.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
             {
-                test: /\.(js|jsx)$/,
+                test: /\.js$/,
                 use: {
                     loader: 'babel-loader',
                 },
                 exclude: /node_modules/,
-            }
+            },
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.jsx']
+        extensions: ['.vue', '.ts', '.js']
     },
     plugins: [
         progressPlugin,
         htmlWebpackPlugin,
         moduleFederationPlugin,
-        externalRemotesPlugin
+        vueLoaderPlugin
     ]
 }
