@@ -1,9 +1,5 @@
-/dist
-/node_modules
-
-# 编译器配置忽略
-.vscode
-.idea
+node_modules/
+dist/
 
 # 配置文件的日志和锁版本的包
 /npm-debug.log
@@ -11,7 +7,3 @@
 /yarn-lock.json
 /package-lock.json
 /yarn.lock
-/pnpm-lock.yaml
-
-# system ignore
-.DS_Store
