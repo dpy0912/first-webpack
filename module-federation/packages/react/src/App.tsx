@@ -12,8 +12,9 @@ const App = () => {
                 padding:"10px",
                 textAlign:"center",
                 backgroundColor:"greenyellow"
-            }}>应用程序1</div>
+            }}>应用程序12</div>
             <div>我是应用程序中的第一个脚手架配置</div>
+            <div>模块热更新</div>
             <Suspense fallback={"loading..."}>
                 <RemoteApp/>
             </Suspense>

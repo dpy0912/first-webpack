@@ -10,7 +10,8 @@ const App = () => {
                 padding:"10px",
                 textAlign:"center",
                 backgroundColor:"red"
-            }}>应用程序21</div>
+            }}>应用程序1</div>
+            <div>模块热部署</div>
         </div>
     )
 }

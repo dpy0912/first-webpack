@@ -3,6 +3,7 @@ const WebpackBar = require("webpackbar");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const {ModuleFederationPlugin} = require('webpack').container;
 const ExternalRemotesPlugin = require("external-remotes-plugin");
+// const WorkboxPlugin = require("workbox-webpack-plugin");
 
 // 打包的进度条
 const progressPlugin = new WebpackBar({
@@ -29,6 +30,13 @@ const moduleFederationPlugin = new ModuleFederationPlugin({
 // 远程仓库加载技术
 const externalRemotesPlugin = new ExternalRemotesPlugin()
 
+// 引入workbox
+// const workboxPlugin = new WorkboxPlugin.GenerateSW({
+//     clientsClaim: true,
+//     skipWaiting: true,
+//     maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
+// })
+
 const pathResolve = (filePath) => {
     return path.resolve(__dirname, filePath)
 }
@@ -50,6 +58,22 @@ module.exports = {
         filename: '[name].[contenthash].js'
     },
     devtool: 'inline-source-map',
+    // 优化
+    optimization: {
+        runtimeChunk: 'single',
+        // 模块的id（缓存作用）
+        moduleIds: 'deterministic',
+        // 切割块
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: "all"
+                }
+            },
+        }
+    },
     module: {
         rules: [
             {
@@ -77,6 +101,6 @@ module.exports = {
         progressPlugin,
         htmlWebpackPlugin,
         moduleFederationPlugin,
-        externalRemotesPlugin
+        externalRemotesPlugin,
     ]
 }
